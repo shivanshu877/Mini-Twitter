@@ -3,7 +3,7 @@ import axios from "axios";
 const login = async (username, password) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/login`,
+      `https://mini-twitter-k57d.onrender.com/api/auth/login`,
       {
         username: username,
         password: password,
@@ -18,7 +18,7 @@ const login = async (username, password) => {
 const signup = async (username, password) => {
   try {
     const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/auth/register`,
+      `https://mini-twitter-k57d.onrender.com/api/auth/register`,
       {
         username: username,
         password: password,
