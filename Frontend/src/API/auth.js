@@ -2,10 +2,13 @@ import axios from "axios";
 
 const login = async (username, password) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/auth/login", {
-      username: username,
-      password: password,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/api/auth/login`,
+      {
+        username: username,
+        password: password,
+      }
+    );
     return response.data;
   } catch (error) {
     throw error;
@@ -15,7 +18,7 @@ const login = async (username, password) => {
 const signup = async (username, password) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/auth/register",
+      `${process.env.REACT_APP_API_URL}/api/auth/register`,
       {
         username: username,
         password: password,

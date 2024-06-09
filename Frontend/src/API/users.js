@@ -3,7 +3,7 @@ import axios from "axios";
 export const getFollowing = async (token) => {
   try {
     const response = await axios.get(
-      "http://localhost:3000/api/follow/getfollowing",
+      `${process.env.REACT_APP_API_URL}/api/follow/getfollowing`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export const getFollowing = async (token) => {
 export const getFollowers = async (token) => {
   try {
     const response = await axios.get(
-      "http://localhost:3000/api/follow/getfollowers",
+      `${process.env.REACT_APP_API_URL}/api/follow/getfollowers`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export const getFollowers = async (token) => {
 export const getAllUsers = async (token) => {
   try {
     const response = await axios.get(
-      "http://localhost:3000/api/follow/getAllUsers",
+      `${process.env.REACT_APP_API_URL}/api/follow/getAllUsers`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ export const getAllUsers = async (token) => {
 export const followUser = async (userId, token) => {
   try {
     const response = await axios.post(
-      `http://localhost:3000/api/follow/${userId}`,
+      `${process.env.REACT_APP_API_URL}/api/follow/${userId}`,
       {},
       {
         headers: {
@@ -76,7 +76,7 @@ export const followUser = async (userId, token) => {
 export const unfollowUser = async (userId, token) => {
   try {
     const response = await axios.post(
-      `http://localhost:3000/api/follow/unfollow/${userId}`,
+      `${process.env.REACT_APP_API_URL}/api/follow/unfollow/${userId}`,
       {},
       {
         headers: {
