@@ -1,8 +1,11 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderNavbar from "./HeaderNavbar";
 import { getFollowing } from "../API/users";
+import Loading from "./Loading"; // Import the Loading component
+
 const Following = () => {
   const [followingData, setFollowingData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -11,9 +14,11 @@ const Following = () => {
       getFollowing(token)
         .then((followingList) => {
           setFollowingData(followingList);
+          setLoading(false); // Data fetched, stop loading
         })
         .catch((error) => {
           console.error(error);
+          setLoading(false); // Stop loading on error
         });
     }
   }, []);
@@ -21,14 +26,20 @@ const Following = () => {
   return (
     <div className="flex flex-col items-center">
       <HeaderNavbar />
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Following</h2>
-        <ul className="grid grid-cols-3 gap-4">
-          {followingData.map((following, index) => (
-            <FollowingCard key={index} username={following} />
-          ))}
-        </ul>
-      </div>
+      {loading ? (
+        <Loading /> // Show Loading component while loading
+      ) : (
+        <>
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold mb-4">Following</h2>
+            <ul className="grid grid-cols-3 gap-4">
+              {followingData.map((following, index) => (
+                <FollowingCard key={index} username={following} />
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
     </div>
   );
 };

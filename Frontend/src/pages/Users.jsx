@@ -7,10 +7,12 @@ import {
   followUser,
   unfollowUser,
 } from "../API/users";
+import Loading from "./Loading"; // Import the Loading component
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [followingList, setFollowingList] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +38,10 @@ const Users = () => {
         });
 
         setUsers(updatedUsers);
+        setLoading(false); // Data fetched, stop loading
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false); // Stop loading on error
       }
     };
 
@@ -82,11 +86,19 @@ const Users = () => {
       <HeaderNavbar />
       <div className="mt-8 max-w-lg">
         <h2 className="text-2xl font-semibold mb-4">Users</h2>
-        <ul>
-          {users.map((user) => (
-            <UserCard key={user._id} user={user} toggleFollow={toggleFollow} />
-          ))}
-        </ul>
+        {loading ? (
+          <Loading /> // Show Loading component while loading
+        ) : (
+          <ul>
+            {users.map((user) => (
+              <UserCard
+                key={user._id}
+                user={user}
+                toggleFollow={toggleFollow}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

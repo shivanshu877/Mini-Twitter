@@ -4,10 +4,12 @@ import MyTweet from "./MyTweet";
 import HeaderNavbar from "./HeaderNavbar";
 import { deleteTweet, userTweets } from "../API/post";
 import { toast } from "react-toastify";
+import Loading from "./Loading"; // Import the Loading component
 
 const MyPosts = () => {
   const navigate = useNavigate();
   const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,9 +21,11 @@ const MyPosts = () => {
     userTweets(token)
       .then((data) => {
         setTweets(data);
+        setLoading(false); // Data fetched, stop loading
       })
       .catch((error) => {
         console.error("Error fetching tweets: ", error);
+        setLoading(false); // Stop loading on error
       });
   }, []);
 
@@ -48,19 +52,23 @@ const MyPosts = () => {
   return (
     <div className="flex flex-col items-center">
       <HeaderNavbar />
-      {tweets.map((tweet) => (
-        <MyTweet
-          key={tweet._id}
-          tweet={{
-            id: tweet._id,
-            username: `@${tweet.user.username}`, // Assuming user object contains the username
-            content: tweet.content,
-            image: tweet.mediaLink,
-          }}
-          onDelete={onDelete}
-          onEdit={onEdit}
-        />
-      ))}
+      {loading ? (
+        <Loading /> // Show Loading component while loading
+      ) : (
+        tweets.map((tweet) => (
+          <MyTweet
+            key={tweet._id}
+            tweet={{
+              id: tweet._id,
+              username: `@${tweet.user.username}`, // Assuming user object contains the username
+              content: tweet.content,
+              image: tweet.mediaLink,
+            }}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ))
+      )}
     </div>
   );
 };

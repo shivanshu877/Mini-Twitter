@@ -1,0 +1,19 @@
+.loader {
+  position: absolute; /* To center the loader */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust position to center */
+  width: 240px; /* Increase width */
+  height: 40px; /* Increase height */
+  border-radius: 40px; /* Adjust border-radius accordingly */
+  background: repeating-linear-gradient(135deg, #f03355 0 20px, #ffa516 0 40px)
+      0/0% no-repeat,
+    repeating-linear-gradient(135deg, #ddd 0 20px, #eee 0 40px) 0/100%;
+  animation: l3 2s infinite;
+}
+
+@keyframes l3 {
+  100% {
+    background-size: 100%;
+  }
+}

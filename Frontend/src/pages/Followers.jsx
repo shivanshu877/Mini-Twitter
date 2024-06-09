@@ -1,33 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeaderNavbar from "./HeaderNavbar";
-import { useState, useEffect } from "react";
 import { getFollowers } from "../API/users";
+import Loading from "./Loading"; // Import the Loading component
+
 const Followers = () => {
-  const [followersData, setfollowersData] = useState([]);
+  const [followersData, setFollowersData] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // Fetch the list of users you are followers
+      // Fetch the list of users you are following
       getFollowers(token)
         .then((followersList) => {
-          setfollowersData(followersList);
+          setFollowersData(followersList);
+          setLoading(false); // Set loading to false when data is fetched
         })
         .catch((error) => {
           console.error(error);
+          setLoading(false); // Set loading to false on error too
         });
     }
   }, []);
+
   return (
     <div className="flex flex-col items-center">
       <HeaderNavbar />
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Followers</h2>
-        <ul className="grid grid-cols-3 gap-4">
-          {followersData.map((follower, index) => (
-            <FollowerCard key={index} username={follower} />
-          ))}
-        </ul>
+        {loading ? (
+          <Loading /> // Show Loading component while loading
+        ) : (
+          <ul className="grid grid-cols-3 gap-4">
+            {followersData.map((follower, index) => (
+              <FollowerCard key={index} username={follower} />
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
