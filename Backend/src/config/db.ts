@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://vashudev8777:1111111111@cluster0.gnfdlhi.mongodb.net/twitter?retryWrites=true&w=majority"
-    );
+    await mongoose.connect(process.env.mongodb);
     console.log("MongoDB connected");
   } catch (err) {
     console.error(err.message);
