@@ -1,35 +1,36 @@
-# Twitter Clone
+# Mini Twitter 🐦
 
-This is a full-stack Twitter clone application built with Node.js, Express, TypeScript, MongoDB, React, and Cloudinary. It allows users to register, log in, create/edit/delete tweets, follow/unfollow users, and view a timeline of tweets from followed users. Users can also upload images for their tweets using Cloudinary.
-## Live Demo
+This is a full-stack Twitter clone application built with Node.js, Express, TypeScript, MongoDB, React, and Cloudinary. It allows users to register, log in, create/edit/delete tweets with images or videos, follow/unfollow users, and view a timeline of tweets from followed users. Users can also upload media for their tweets using Cloudinary.
+
+## 🚀 Live Demo
 
 Visit the live demo: [Mini Twitter 🎉](https://mini-twitter-kohl.vercel.app/loginsignup)
 
-## Features
+## ✨ Features
 
 ### Backend
 
-- User registration with a unique username and password
-- User authentication using JWT (JSON Web Tokens)
-- Create, edit, and delete tweets with optional image uploads
-- Follow/unfollow users
-- View timeline of tweets from followed users in chronological order
-- View followers and following users
-- See your own posts
+- 📝 User registration with a unique username and password
+- 🔒 User authentication using JWT (JSON Web Tokens)
+- 🖋️ Create, edit, and delete tweets with optional image or video uploads
+- 🔄 Follow/unfollow users
+- 🕒 View timeline of tweets from followed users in chronological order
+- 👥 View followers and following users
+- 👤 See your own posts
 
 ### Frontend
 
-- User login and signup
-- Home page displaying tweets from followed users with images
-- Users section to see and follow/unfollow all users
-- View posts from followed users on the home screen
-- Followers and following sections showing usernames
-- My posts section to see and manage your own posts (edit/delete)
-- Create post section with content and image upload functionality using Cloudinary
-- Profile section displaying the user's name
-- Logout button to log out
+- 🔑 User login and signup
+- 🏠 Home page displaying tweets from followed users with images or videos
+- 📋 Users section to see and follow/unfollow all users
+- 📅 View posts from followed users on the home screen
+- 👥 Followers and following sections showing usernames
+- 📝 My posts section to see and manage your own posts (edit/delete)
+- 📷 Create post section with content and media upload functionality using Cloudinary
+- 👤 Profile section displaying the user's name
+- 🚪 Logout button to log out
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 ### Backend
 
@@ -45,9 +46,9 @@ Visit the live demo: [Mini Twitter 🎉](https://mini-twitter-kohl.vercel.app/lo
 
 - React
 - Axios
-- Cloudinary for image uploads
+- Cloudinary for media uploads
 
-## Getting Started
+## 🏁 Getting Started
 
 ### Prerequisites
 
@@ -105,7 +106,7 @@ Make sure you have the following installed on your machine:
 3. Create a `.env` file in the `frontend` directory and add your environment variables:
 
     ```env
-    REACT_APP_API_URL=http://localhost:5000
+    REACT_APP_API_URL=http://localhost:3000
     REACT_APP_cloudnary_preset_name=your_cloudinary_upload_preset
     REACT_APP_cloudnary_cloud_name=your_cloudinary_cloud_name
     ```
@@ -116,9 +117,9 @@ Make sure you have the following installed on your machine:
     npm start
     ```
 
-    The development server will start on the port 3000.
+    The development server will start on port 3000.
 
-## API Endpoints
+## 📖 API Endpoints
 
 ### Authentication
 
@@ -134,12 +135,12 @@ Make sure you have the following installed on your machine:
 
 - **Create Tweet**: `POST /api/tweets`
   - Headers: `{ "Authorization": "Bearer jwt_token" }`
-  - Request Body: `{ "content": "string", "videoLink": "string (optional)" }`
+  - Request Body: `{ "content": "string", "mediaUrl": "string (optional)" }`
   - Response: `Tweet object`
 
 - **Edit Tweet**: `PUT /api/tweets/:tweetId`
   - Headers: `{ "Authorization": "Bearer jwt_token" }`
-  - Request Body: `{ "content": "string", "videoLink": "string (optional)" }`
+  - Request Body: `{ "content": "string", "mediaUrl": "string (optional)" }`
   - Response: `Updated Tweet object`
 
 - **Delete Tweet**: `DELETE /api/tweets/:tweetId`
@@ -160,9 +161,7 @@ Make sure you have the following installed on your machine:
   - Headers: `{ "Authorization": "Bearer jwt_token" }`
   - Response: `{ "message": "User unfollowed" }`
 
-
-
-## Acknowledgements
+## 💖 Acknowledgements
 
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
@@ -178,5 +177,4 @@ Feel free to contribute to this project by opening issues or submitting pull req
 
 ### Author
 
-Shivanshu - (https://github.com/shivanshu877)
-
+Shivanshu - [GitHub](https://github.com/shivanshu877)
