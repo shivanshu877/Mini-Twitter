@@ -1,6 +1,9 @@
 # Twitter Clone
 
 This is a full-stack Twitter clone application built with Node.js, Express, TypeScript, MongoDB, React, and Cloudinary. It allows users to register, log in, create/edit/delete tweets, follow/unfollow users, and view a timeline of tweets from followed users. Users can also upload images for their tweets using Cloudinary.
+## Live Demo
+
+Visit the live demo: [Mini Twitter 🎉](https://mini-twitter-kohl.vercel.app/loginsignup)
 
 ## Features
 
