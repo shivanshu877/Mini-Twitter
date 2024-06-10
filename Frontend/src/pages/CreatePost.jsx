@@ -38,11 +38,11 @@ const CreatePost = ({ postId, initialContent, initialImage }) => {
     setLoading(true);
     const formData = new FormData();
     formData.append("file", image);
-    formData.append("upload_preset", "goumkwo7");
+    formData.append("upload_preset", process.env.REACT_APP_cloudnary_preset_name);
 
     try {
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/dfml1xgpa/image/upload",
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_cloudnary_cloud_name}/image/upload`,
         {
           method: "POST",
           body: formData,

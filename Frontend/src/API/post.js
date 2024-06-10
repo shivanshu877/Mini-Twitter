@@ -3,7 +3,7 @@ import axios from "axios";
 const createPost = async (token, content, imageUrl) => {
   try {
     const response = await axios.post(
-      `https://speakx2-backend.vercel.app/api/tweets`,
+      `${process.env.REACT_APP_API_URL}/api/tweets`,
       {
         content: content,
         mediaLink: imageUrl,
@@ -24,7 +24,7 @@ const createPost = async (token, content, imageUrl) => {
 const editPost = async (token, id, content, imageUrl) => {
   try {
     const response = await axios.put(
-      `https://speakx2-backend.vercel.app/api/tweets/${id}`,
+      `${process.env.REACT_APP_API_URL}/api/tweets/${id}`,
       {
         id: id,
         content: content,
@@ -45,7 +45,7 @@ const editPost = async (token, id, content, imageUrl) => {
 const fetchPosts = async (token) => {
   try {
     const response = await axios.get(
-      `https://speakx2-backend.vercel.app/api/tweets/timeline`,
+      `${process.env.REACT_APP_API_URL}/api/tweets/timeline`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ const fetchPosts = async (token) => {
 const userTweets = async (token) => {
   try {
     const response = await axios.get(
-      `https://speakx2-backend.vercel.app/api/tweets/usertweet`,
+      `${process.env.REACT_APP_API_URL}/api/tweets/usertweet`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const userTweets = async (token) => {
 const deleteTweet = async (id, token) => {
   try {
     const response = await axios.delete(
-      `https://speakx2-backend.vercel.app/api/tweets/${id}`,
+      `${process.env.REACT_APP_API_URL}/api/tweets/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
