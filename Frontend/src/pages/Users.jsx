@@ -3,12 +3,12 @@ import HeaderNavbar from "./HeaderNavbar";
 import {
   getAllUsers,
   getFollowing,
-  getFollowers,
   followUser,
   unfollowUser,
 } from "../API/users";
 import Loading from "./Loading"; // Import the Loading component
-
+import { toast } from "react-toastify";
+import SmallLoader from "./SmallLoader"; // Import the SmallLoader component
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [followingList, setFollowingList] = useState([]);
@@ -34,6 +34,7 @@ const Users = () => {
           return {
             ...user,
             followed: isFollowed,
+            isLoading: false, // Add loading state for each user
           };
         });
 
@@ -50,17 +51,28 @@ const Users = () => {
 
   const toggleFollow = async (userId, followed) => {
     try {
+      // Set the loading state for the specific user
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, isLoading: true } : user
+        )
+      );
+
       const token = localStorage.getItem("token");
 
       if (followed) {
         await unfollowUser(userId, token);
+        toast.success("Unfollowed successfully");
       } else {
         await followUser(userId, token);
+        toast.success("Followed successfully");
       }
 
       // Find the user object in the users array based on userId
       const updatedUsers = users.map((user) =>
-        user._id === userId ? { ...user, followed: !followed } : user
+        user._id === userId
+          ? { ...user, followed: !followed, isLoading: false }
+          : user
       );
       setUsers(updatedUsers);
 
@@ -78,6 +90,13 @@ const Users = () => {
       setFollowingList(updatedFollowingList);
     } catch (error) {
       console.error("Error toggling follow:", error);
+      toast.error("Error toggling follow status");
+      // Reset the loading state on error
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, isLoading: false } : user
+        )
+      );
     }
   };
 
@@ -119,8 +138,15 @@ const UserCard = ({ user, toggleFollow }) => {
             user.followed ? "bg-red-500 text-white" : "bg-blue-500 text-white"
           }`}
           onClick={() => toggleFollow(user._id, user.followed)}
+          disabled={user.isLoading} // Disable button while loading
         >
-          {user.followed ? "Unfollow" : "Follow"}
+          {user.isLoading ? (
+            <SmallLoader /> // Show loading component in button
+          ) : user.followed ? (
+            "Unfollow"
+          ) : (
+            "Follow"
+          )}
         </button>
       </div>
     </li>

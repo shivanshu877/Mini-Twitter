@@ -11,7 +11,11 @@ const login = async (username, password) => {
     );
     return response.data;
   } catch (error) {
-    throw error;
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw error;
+    }
   }
 };
 
@@ -24,10 +28,14 @@ const signup = async (username, password) => {
         password: password,
       }
     );
-    // Assuming your backend returns some data upon successful login
+
     return response.data;
   } catch (error) {
-    throw error;
+    if (error.response && error.response.status === 400) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw error;
+    }
   }
 };
 

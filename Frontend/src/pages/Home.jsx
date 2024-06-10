@@ -20,11 +20,12 @@ const Home = () => {
 
     fetchPosts(token)
       .then((data) => {
-        // Extract username, content, and mediaLink from each tweet
+        // Extract username, content, mediaLink, and createdAt from each tweet
         const formattedTweets = data.map((tweet) => ({
           username: tweet.user.username,
           content: tweet.content,
           image: tweet.mediaLink,
+          createdAt: tweet.createdAt,
         }));
 
         setTweets(formattedTweets);
@@ -42,13 +43,17 @@ const Home = () => {
       {loading ? (
         <Loading /> // Use the Loading component while loading
       ) : (
-        <>
-          <div className="tweet-feed mt-24 w-full flex flex-col items-center">
-            {tweets.map((tweet, index) => (
-              <Tweet key={index} {...tweet} />
-            ))}
-          </div>
-        </>
+        <div className="tweet-feed mt-24 w-full flex flex-col items-center">
+          {tweets.length > 0 ? (
+            tweets.map((tweet, index) => <Tweet key={index} {...tweet} />)
+          ) : (
+            <div className="flex flex-col items-center justify-center h-64 mt-24">
+              <p className="text-lg font-semibold text-gray-700">
+                No tweets to show. Follow users to see their posts! 😊
+              </p>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

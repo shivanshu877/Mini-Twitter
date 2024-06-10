@@ -31,11 +31,17 @@ const Followers = () => {
         {loading ? (
           <Loading /> // Show Loading component while loading
         ) : (
-          <ul className="grid grid-cols-3 gap-4">
-            {followersData.map((follower, index) => (
-              <FollowerCard key={index} username={follower} />
-            ))}
-          </ul>
+          <>
+            {followersData.length > 0 ? (
+              <ul className="grid grid-cols-3 gap-4">
+                {followersData.map((follower, index) => (
+                  <FollowerCard key={index} username={follower} />
+                ))}
+              </ul>
+            ) : (
+              <p className="text-lg text-gray-600">No followers yet. 😕</p>
+            )}
+          </>
         )}
       </div>
     </div>

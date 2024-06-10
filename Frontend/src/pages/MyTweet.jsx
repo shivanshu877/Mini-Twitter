@@ -1,14 +1,15 @@
 import React from "react";
+import moment from "moment"; // Import moment.js for date formatting
 
 const MyTweet = ({ tweet, onDelete, onEdit }) => {
-  const { id, username, content, image } = tweet;
+  const { id, username, content, image, createdAt } = tweet;
 
   const handleDelete = () => {
     onDelete(id);
   };
 
   const handleEdit = () => {
-    onEdit(id , content, image);
+    onEdit(id, content, image);
   };
 
   return (
@@ -18,7 +19,11 @@ const MyTweet = ({ tweet, onDelete, onEdit }) => {
     >
       <div className="p-6 flex flex-col justify-between w-full">
         <div>
-          <div className="flex items-center space-x-4 mb-4"></div>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="text-m text-gray-500">
+              {moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+            </div>
+          </div>
           <div
             className="text-gray-800 mb-6 overflow-hidden"
             style={{ maxHeight: "6.5em" }}

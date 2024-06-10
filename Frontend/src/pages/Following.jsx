@@ -32,11 +32,17 @@ const Following = () => {
         <>
           <div className="mt-8">
             <h2 className="text-2xl font-semibold mb-4">Following</h2>
-            <ul className="grid grid-cols-3 gap-4">
-              {followingData.map((following, index) => (
-                <FollowingCard key={index} username={following} />
-              ))}
-            </ul>
+            {followingData.length > 0 ? (
+              <ul className="grid grid-cols-3 gap-4">
+                {followingData.map((following, index) => (
+                  <FollowingCard key={index} username={following} />
+                ))}
+              </ul>
+            ) : (
+              <p className="text-lg text-gray-600">
+                Not following anyone yet. 😕
+              </p>
+            )}
           </div>
         </>
       )}

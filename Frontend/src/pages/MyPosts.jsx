@@ -39,8 +39,8 @@ const MyPosts = () => {
       setTweets(tweets.filter((tweet) => tweet._id !== id));
       toast.success("Post deleted successfully");
     } catch (error) {
-      toast.error("Error occurred while saving the post");
-      console.error("Error saving post:", error);
+      toast.error("Error occurred while deleting the post");
+      console.error("Error deleting post:", error);
     }
   };
 
@@ -63,6 +63,7 @@ const MyPosts = () => {
               username: `@${tweet.user.username}`, // Assuming user object contains the username
               content: tweet.content,
               image: tweet.mediaLink,
+              createdAt: tweet.createdAt, // Pass the createdAt value
             }}
             onDelete={onDelete}
             onEdit={onEdit}

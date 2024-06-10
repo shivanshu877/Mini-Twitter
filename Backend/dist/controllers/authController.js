@@ -44,7 +44,7 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var User_1 = require("../models/User");
 var register = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, username, password, hashedPassword, user;
+    var _a, username, password, hashedPassword, check, user;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -52,9 +52,15 @@ var register = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [4 /*yield*/, bcrypt_1.default.hash(password, 10)];
             case 1:
                 hashedPassword = _b.sent();
+                return [4 /*yield*/, User_1.User.findOne({ username: username })];
+            case 2:
+                check = _b.sent();
+                if (check) {
+                    return [2 /*return*/, res.status(400).send({ message: "Username already exists" })];
+                }
                 user = new User_1.User({ username: username, password: hashedPassword });
                 return [4 /*yield*/, user.save()];
-            case 2:
+            case 3:
                 _b.sent();
                 res.status(201).send({ message: "User registered successfully" });
                 return [2 /*return*/];

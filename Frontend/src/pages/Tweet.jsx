@@ -1,6 +1,7 @@
 import React from "react";
+import moment from "moment"; // Import moment.js for date formatting
 
-const Tweet = ({ username, content, image }) => {
+const Tweet = ({ username, content, image, createdAt }) => {
   const cardSize = "600px"; // Fixed size for both width and height
 
   return (
@@ -12,7 +13,14 @@ const Tweet = ({ username, content, image }) => {
             src={`https://robohash.org/${username}`}
             alt={`${username}'s avatar`}
           />
-          <div className="text-xl font-semibold text-gray-900">{username}</div>
+          <div className="flex flex-col">
+            <div className="text-xl font-semibold text-gray-900">
+              {username}
+            </div>
+            <div className="text-m text-gray-500">
+              {moment(createdAt).format("MMMM Do YYYY, h:mm:ss a")}
+            </div>
+          </div>
         </div>
         <div
           className="text-gray-800 overflow-hidden"
