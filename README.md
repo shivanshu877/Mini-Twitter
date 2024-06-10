@@ -106,7 +106,7 @@ Make sure you have the following installed on your machine:
 3. Create a `.env` file in the `frontend` directory and add your environment variables:
 
     ```env
-    REACT_APP_API_URL=http://localhost:5000
+    REACT_APP_API_URL=http://localhost:3000
     REACT_APP_cloudnary_preset_name=your_cloudinary_upload_preset
     REACT_APP_cloudnary_cloud_name=your_cloudinary_cloud_name
     ```
