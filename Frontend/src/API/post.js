@@ -3,7 +3,7 @@ import axios from "axios";
 const createPost = async (token, content, imageUrl) => {
   try {
     const response = await axios.post(
-      `https://mini-twitter-k57d.onrender.com/api/tweets`,
+      `https://speakx2-backend.vercel.app/api/tweets`,
       {
         content: content,
         mediaLink: imageUrl,
@@ -24,7 +24,7 @@ const createPost = async (token, content, imageUrl) => {
 const editPost = async (token, id, content, imageUrl) => {
   try {
     const response = await axios.put(
-      `https://mini-twitter-k57d.onrender.com/api/tweets/${id}`,
+      `https://speakx2-backend.vercel.app/api/tweets/${id}`,
       {
         id: id,
         content: content,
@@ -45,7 +45,7 @@ const editPost = async (token, id, content, imageUrl) => {
 const fetchPosts = async (token) => {
   try {
     const response = await axios.get(
-      `https://mini-twitter-k57d.onrender.com/api/tweets/timeline`,
+      `https://speakx2-backend.vercel.app/api/tweets/timeline`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ const fetchPosts = async (token) => {
 const userTweets = async (token) => {
   try {
     const response = await axios.get(
-      `https://mini-twitter-k57d.onrender.com/api/tweets/usertweet`,
+      `https://speakx2-backend.vercel.app/api/tweets/usertweet`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const userTweets = async (token) => {
 const deleteTweet = async (id, token) => {
   try {
     const response = await axios.delete(
-      `https://mini-twitter-k57d.onrender.com/api/tweets/${id}`,
+      `https://speakx2-backend.vercel.app/api/tweets/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

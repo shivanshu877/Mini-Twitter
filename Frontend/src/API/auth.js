@@ -3,7 +3,7 @@ import axios from "axios";
 const login = async (username, password) => {
   try {
     const response = await axios.post(
-      `https://mini-twitter-k57d.onrender.com/api/auth/login`,
+      `https://speakx2-backend.vercel.app/api/auth/login`,
       {
         username: username,
         password: password,
@@ -22,7 +22,7 @@ const login = async (username, password) => {
 const signup = async (username, password) => {
   try {
     const response = await axios.post(
-      `https://mini-twitter-k57d.onrender.com/api/auth/register`,
+      `https://speakx2-backend.vercel.app/api/auth/register`,
       {
         username: username,
         password: password,
