@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import HeaderNavbar from "./HeaderNavbar";
 import { getFollowers } from "../API/users";
-import Loading from "./Loading"; // Import the Loading component
-
+import Loading from "./Loading"; 
 const Followers = () => {
   const [followersData, setFollowersData] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // Fetch the list of users you are following
       getFollowers(token)
         .then((followersList) => {
           setFollowersData(followersList);
-          setLoading(false); // Set loading to false when data is fetched
+          setLoading(false); 
         })
         .catch((error) => {
           console.error(error);
-          setLoading(false); // Set loading to false on error too
+          setLoading(false); 
         });
     }
   }, []);
@@ -29,7 +27,7 @@ const Followers = () => {
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Followers</h2>
         {loading ? (
-          <Loading /> // Show Loading component while loading
+          <Loading /> 
         ) : (
           <>
             {followersData.length > 0 ? (

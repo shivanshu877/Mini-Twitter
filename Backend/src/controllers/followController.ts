@@ -85,7 +85,6 @@ export const getFollowers = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
-    // Extract usernames from followers array
     const followersUsernames = user.followers
       .map((follower) => {
         if (typeof follower === "object" && follower.username) {
@@ -94,7 +93,6 @@ export const getFollowers = async (req: Request, res: Response) => {
         return null;
       })
       .filter((username) => username !== null);
-    // Send followers usernames in the response
     res.send(followersUsernames);
   } catch (error) {
     console.error(error);
@@ -110,7 +108,6 @@ export const getFollowing = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
-    // Extract usernames from following array
     const followingUsernames = user.following
       .map((following) => {
         if (typeof following === "object" && following.username) {
@@ -119,7 +116,6 @@ export const getFollowing = async (req: Request, res: Response) => {
         return null;
       })
       .filter((username) => username !== null);
-    // Send following usernames in the response
     res.send(followingUsernames);
   } catch (error) {
     console.error(error);

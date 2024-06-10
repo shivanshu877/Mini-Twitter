@@ -1,24 +1,22 @@
 import React, { useState, useEffect } from "react";
 import HeaderNavbar from "./HeaderNavbar";
 import { getFollowing } from "../API/users";
-import Loading from "./Loading"; // Import the Loading component
-
+import Loading from "./Loading"; 
 const Following = () => {
   const [followingData, setFollowingData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      // Fetch the list of users you are following
       getFollowing(token)
         .then((followingList) => {
           setFollowingData(followingList);
-          setLoading(false); // Data fetched, stop loading
+          setLoading(false); 
         })
         .catch((error) => {
           console.error(error);
-          setLoading(false); // Stop loading on error
+          setLoading(false); 
         });
     }
   }, []);
@@ -27,7 +25,7 @@ const Following = () => {
     <div className="flex flex-col items-center">
       <HeaderNavbar />
       {loading ? (
-        <Loading /> // Show Loading component while loading
+        <Loading /> 
       ) : (
         <>
           <div className="mt-8">

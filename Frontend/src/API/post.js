@@ -17,7 +17,7 @@ const createPost = async (token, content, imageUrl) => {
     return response.data;
   } catch (error) {
     console.error("Error creating tweet:", error);
-    throw error; // Consider handling the error more gracefully
+    throw error;
   }
 };
 

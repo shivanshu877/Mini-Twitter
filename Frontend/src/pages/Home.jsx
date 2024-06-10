@@ -3,11 +3,11 @@ import Tweet from "./Tweet";
 import HeaderNavbar from "./HeaderNavbar";
 import { useNavigate } from "react-router-dom";
 import { fetchPosts } from "../API/post";
-import Loading from "./Loading"; // Import the Loading component
+import Loading from "./Loading"; 
 
 const Home = () => {
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true); 
 
   const navigate = useNavigate();
 
@@ -15,12 +15,11 @@ const Home = () => {
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/loginsignup");
-      return; // Exit early if no token is found
+      return; 
     }
 
     fetchPosts(token)
       .then((data) => {
-        // Extract username, content, mediaLink, and createdAt from each tweet
         const formattedTweets = data.map((tweet) => ({
           username: tweet.user.username,
           content: tweet.content,
@@ -29,11 +28,11 @@ const Home = () => {
         }));
 
         setTweets(formattedTweets);
-        setLoading(false); // Data fetched, stop loading
+        setLoading(false); 
       })
       .catch((error) => {
         console.error("Error fetching tweets: ", error);
-        setLoading(false); // Stop loading on error
+        setLoading(false); 
       });
   }, [navigate]);
 
@@ -41,7 +40,7 @@ const Home = () => {
     <div className="flex flex-col items-center">
       <HeaderNavbar /> {/* Include the Navbar when not loading */}
       {loading ? (
-        <Loading /> // Use the Loading component while loading
+        <Loading /> 
       ) : (
         <div className="tweet-feed mt-24 w-full flex flex-col items-center">
           {tweets.length > 0 ? (

@@ -2,11 +2,10 @@ import React, { useRef, useState } from "react";
 import moment from "moment"; // Import moment.js for date formatting
 
 const Tweet = ({ username, content, image, createdAt }) => {
-  const cardSize = "600px"; // Fixed size for both width and height
-  const videoRef = useRef(null); // Reference for video element
-  const [isPlaying, setIsPlaying] = useState(false); // State to track video playing status
+  const cardSize = "600px"; 
+  const videoRef = useRef(null); 
+  const [isPlaying, setIsPlaying] = useState(false); 
 
-  // Function to check if the file is a video based on its extension
   const isVideo = (file) => {
     const videoExtensions = [".mp4", ".mkv", ".webm", ".avi", ".mov"];
     return videoExtensions.some((ext) => file.toLowerCase().endsWith(ext));
@@ -34,7 +33,6 @@ const Tweet = ({ username, content, image, createdAt }) => {
     newWindow.document.close();
   };
 
-  // Function to toggle video play/pause
   const togglePlay = () => {
     if (videoRef.current) {
       if (videoRef.current.paused) {
@@ -67,7 +65,7 @@ const Tweet = ({ username, content, image, createdAt }) => {
         </div>
         <div
           className="text-gray-800 overflow-hidden"
-          style={{ maxHeight: "240px" }} // Adjust the max height as needed
+          style={{ maxHeight: "240px" }} 
         >
           <p className="whitespace-wrap">{content}</p>
         </div>

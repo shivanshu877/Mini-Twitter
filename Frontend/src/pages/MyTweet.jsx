@@ -1,6 +1,5 @@
 import React from "react";
-import moment from "moment"; // Import moment.js for date formatting
-
+import moment from "moment"; 
 const MyTweet = ({ tweet, onDelete, onEdit }) => {
   const { id, username, content, image, createdAt } = tweet;
 

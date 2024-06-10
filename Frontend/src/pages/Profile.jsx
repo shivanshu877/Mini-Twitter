@@ -6,7 +6,6 @@ const Profile = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulating username retrieval, replace this with actual logic
     const storedUsername = localStorage.getItem("username");
 
     if (storedUsername) {

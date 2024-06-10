@@ -4,12 +4,12 @@ import MyTweet from "./MyTweet";
 import HeaderNavbar from "./HeaderNavbar";
 import { deleteTweet, userTweets } from "../API/post";
 import { toast } from "react-toastify";
-import Loading from "./Loading"; // Import the Loading component
+import Loading from "./Loading";
 
 const MyPosts = () => {
   const navigate = useNavigate();
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,18 +21,17 @@ const MyPosts = () => {
     userTweets(token)
       .then((data) => {
         setTweets(data);
-        setLoading(false); // Data fetched, stop loading
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching tweets: ", error);
-        setLoading(false); // Stop loading on error
+        setLoading(false);
       });
-  }, []);
+  }, [navigate]);
 
   const onDelete = (id) => {
     console.log("Deleting tweet with id:", id);
     const token = localStorage.getItem("token");
-    // Call the deleteTweet API function
 
     try {
       deleteTweet(id, token);
@@ -53,22 +52,30 @@ const MyPosts = () => {
     <div className="flex flex-col items-center">
       <HeaderNavbar />
       {loading ? (
-        <Loading /> // Show Loading component while loading
+        <Loading />
       ) : (
-        tweets.map((tweet) => (
-          <MyTweet
-            key={tweet._id}
-            tweet={{
-              id: tweet._id,
-              username: `@${tweet.user.username}`, // Assuming user object contains the username
-              content: tweet.content,
-              image: tweet.mediaLink,
-              createdAt: tweet.createdAt, // Pass the createdAt value
-            }}
-            onDelete={onDelete}
-            onEdit={onEdit}
-          />
-        ))
+        <>
+          {tweets.length === 0 ? (
+            <div className="mt-10 text-center">
+              <p>No posts are there, go and create one!</p>
+            </div>
+          ) : (
+            tweets.map((tweet) => (
+              <MyTweet
+                key={tweet._id}
+                tweet={{
+                  id: tweet._id,
+                  username: `@${tweet.user.username}`,
+                  content: tweet.content,
+                  image: tweet.mediaLink,
+                  createdAt: tweet.createdAt,
+                }}
+                onDelete={onDelete}
+                onEdit={onEdit}
+              />
+            ))
+          )}
+        </>
       )}
     </div>
   );
