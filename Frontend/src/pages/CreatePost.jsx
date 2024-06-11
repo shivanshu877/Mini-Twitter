@@ -3,13 +3,13 @@ import HeaderNavbar from "./HeaderNavbar";
 import { editPost, createPost } from "../API/post";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "./Loading"; // Import the SmallLoader component
+import Loading from "./Loading";
 
 const CreatePost = ({ postId, initialContent, initialImage }) => {
   const [id, setId] = useState(postId);
   const [content, setContent] = useState("");
-  const [file, setFile] = useState(null); // State for file (either image or video)
-  const [fileUrl, setFileUrl] = useState(""); // State for file URL
+  const [file, setFile] = useState(null);
+  const [fileUrl, setFileUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [posting, setPosting] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -35,6 +35,11 @@ const CreatePost = ({ postId, initialContent, initialImage }) => {
   };
 
   const uploadFile = async () => {
+    if (!file) {
+      toast.error("Please select a file to upload.");
+      return;
+    }
+
     setLoading(true);
     const formData = new FormData();
     formData.append("file", file);
@@ -75,13 +80,13 @@ const CreatePost = ({ postId, initialContent, initialImage }) => {
     setPosting(true);
     try {
       if (postId) {
-        const response = await editPost(token, id, content, fileUrl);
+        await editPost(token, id, content, fileUrl);
         toast.success("Post updated successfully");
         setId(null);
         setContent("");
         setFileUrl("");
       } else {
-        const response = await createPost(token, content, fileUrl);
+        await createPost(token, content, fileUrl);
         toast.success("Post created successfully");
         setId(null);
         setContent("");
@@ -117,7 +122,7 @@ const CreatePost = ({ postId, initialContent, initialImage }) => {
         {fileUrl && (
           <div className="mt-4">
             <p className="font-semibold">
-              {file.type.startsWith("image") ? "Image" : "Video"} URL:
+              {file && file.type.startsWith("image") ? "Image" : "Video"} URL:
             </p>
             <a href={fileUrl} target="_blank" rel="noopener noreferrer">
               {fileUrl}
